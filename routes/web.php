@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Register\Register;
+use App\Http\Livewire\Registers\Registers;
 use App\Http\Livewire\User\Users;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -24,8 +25,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 //rotas de usuários
-Route::middleware(['auth:sanctum', 'verified'])
-    ->get('/usuarios', Users::class)->name('usuarios');
+Route::middleware(['auth:sanctum', 'verified', 'can:isAdmin'])
+    ->get('/usuarios', Users::class)->name('users');
 
     Route::middleware(['auth:sanctum', 'verified'])
-    ->get('/register', Register::class)->name('registro-de-ponto');
+    ->get('/registro-de-ponto', Register::class)->name('register');
+
+    Route::middleware(['auth:sanctum', 'verified', 'can:isAdmin'])
+    ->get('/registro-de-ponto-colaborador', Registers::class)->name('registers');

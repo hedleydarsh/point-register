@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Register;
 
 use App\Models\Register as ModelsRegister;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Register extends Component
@@ -13,9 +14,9 @@ class Register extends Component
         $user = auth()->user();
         $dtHoje = '%' . Carbon::now()->format('Y-m-d') . '%';
         $registers = ModelsRegister::where('created_at', 'like', $dtHoje)
-        ->where('user_id', $user->id)
-        ->orderBy('created_at', 'desc')
-        ->get();
+            ->where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('livewire.register.register', [
             'user' => $user,

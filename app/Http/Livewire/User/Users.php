@@ -40,8 +40,8 @@ class Users extends Component
     //Regras de validação
     protected $rules = [
         'name' => 'required|min:6',
-        'email' => 'required|email',
-        'cpf' => 'required|cpf',
+        'email' => 'required|email|unique:users',
+        'cpf' => 'required|cpf|unique:collaborators',
         'ocupattion' => 'required',
         'dt_birth' => 'required',
         'password' => 'required',
