@@ -36,11 +36,15 @@ class ManagerSeeder extends Seeder
         ];
 
         foreach ($users as $user) {
-            $user = User::create($user);
-            Collaborator::factory()->create([
-                'user_id' => $user['id'],
-                'name' => $user['name'],
-            ]);
+            try {
+                $user = User::create($user);
+                Collaborator::factory()->create([
+                    'user_id' => $user['id'],
+                    'name' => $user['name'],
+                ]);   //code...
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
         }
     }
 }
