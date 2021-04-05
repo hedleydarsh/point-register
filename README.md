@@ -1,11 +1,41 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Sistema para registros de pontos
+Este é um simples sistema de registro de pontos desenvolvido com Banco 
+de dados MYSQL, PHP, Laravel, Jestream e Liveware.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+- Antes de rodar este projeto cetifique-se de ter instalado em sua máquina,
+  O banco de dados MYSQL, PHP, Composer, NODEJS. 
+
+## Como Instalar
+- Primeiramente certifique-se de ter instalado.
+- [MYSQL]('https://www.mysql.com/downloads/')
+- [PHP]('https://www.php.net/downloads.php)
+- [NODEJS]('https://nodejs.org/en/download/')
+- [COMPOSER]('https://getcomposer.org/download/')
+- Faça o clode desse repositório
+  Use $ git clone git clone https://hedleyLima@bitbucket.org/hedleyLima/point-register.git
+
+- Rode o comando: 
+  composer update --no-scripts
+
+- Rode os comandos:
+  $npm install
+  $npm run dev
+
+- Crie um banco de dados mysql com nome point_register
+- Os usuário padrão para o banco de dados é root sem senha.
+- Caso necessário você pode alterar as credenciais no arquivo .env
+  Obs: Este projeto já inclue o arquivo .env para facilitar a instalação,
+  Embora seja uma má prática enviar o arquivo .env para o repositório este
+  projeto não contepla dados sigiloso, portanto não há problema.
+- Rode o comando:
+  $ php artisan migrate
+- Rode o comando:
+  $ php artisan db:seed
+- Rode o comando:
+  $ php artisan serve
+
+- Pronto o sistema estará rodando na url http://localhost:8000
+  Obs: Caso prefira este projeto contempla em sua pasta rais um arquivo BANCODEDADOS.sql, você pode iniciar e popular o seu banco com ele.
 
 ## About Laravel
 
