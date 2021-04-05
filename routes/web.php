@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\User\Users;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,7 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+//rotas de usuários
+Route::middleware(['auth:sanctum', 'verified'])
+    ->get('/usuarios', Users::class)->name('usuarios');
