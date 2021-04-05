@@ -34,12 +34,17 @@ de dados MYSQL, PHP, Laravel, Jestream e Liveware.
 > projeto não contepla dados sigiloso, portanto não há problema.
 
 - Rode o comando:
-  $ php artisan migrate
+~~~php
+$ php artisan migrate
+~~~~
 - Rode o comando:
+~~~php
   $ php artisan db:seed
+~~~~
 - Rode o comando:
+~~~php
   $ php artisan serve
-
+~~~~
 - Pronto o sistema estará rodando na url http://localhost:8000
 > Obs: Caso prefira este projeto contempla em sua pasta raiz um arquivo chamado BANCODEDADOS.sql, 
 > você pode iniciar e popular o seu banco de dados com ele.
