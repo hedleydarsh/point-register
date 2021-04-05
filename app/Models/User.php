@@ -67,6 +67,17 @@ class User extends Authenticatable
         return $this->hasOne(Collaborator::class);
     }
 
+    /**
+     * Get all of the register for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+
+    public function register()
+    {
+        return $this->hasMany(Register::class);
+    }
+
     //Acessor para retornar nomes sempre em letra maiúscula
     public function getNameAttribute($value)
     {
