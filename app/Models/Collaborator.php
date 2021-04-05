@@ -10,6 +10,17 @@ class Collaborator extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'email',
+        'cpf',
+        'ocupattion',
+        'dt_birth',
+        'cep',
+        'manager_id',
+        'user_id'
+    ];
+
     public function user()
     {
         return $this->hasOne(User::class);
