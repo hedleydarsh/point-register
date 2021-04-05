@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05-Abr-2021 às 12:09
+-- Tempo de geração: 05-Abr-2021 às 18:39
 -- Versão do servidor: 10.4.17-MariaDB
 -- versão do PHP: 7.4.13
 
@@ -32,12 +32,13 @@ CREATE TABLE `collaborators` (
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `manager_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_by` bigint(20) UNSIGNED DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cpf` varchar(14) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cep` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ocupattion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `dt_birth` date DEFAULT NULL,
-  `address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `age` int(11) NOT NULL,
+  `cpf` varchar(14) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cep` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ocupattion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dt_birth` date NOT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -47,14 +48,24 @@ CREATE TABLE `collaborators` (
 -- Extraindo dados da tabela `collaborators`
 --
 
-INSERT INTO `collaborators` (`id`, `user_id`, `manager_id`, `created_by`, `name`, `cpf`, `cep`, `ocupattion`, `dt_birth`, `address`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 2, 'TICTORGFGF', '05189076350', '40243-514', 'enim', '1990-11-26', '54391-419, Largo Natan, 799\nSanta Matheus do Sul - AM', NULL, '2021-04-05 04:48:01', '2021-04-05 09:46:17'),
-(2, 2, 1, 1, 'HEDLEY', '816.580.440-53', '43480-843', 'et', '2016-12-26', '80938-980, R. Adriana Marés, 98819\nMascarenhas d\'Oeste - AL', NULL, '2021-04-05 04:48:01', '2021-04-05 04:48:01'),
-(3, 3, 2, 1, 'ISABELLA GODóI FERRAZ NETO', '026.375.531-20', '47259-831', 'nisi', '1993-02-12', '22149-420, Av. Horácio Tamoio, 19171\nSão Jefferson - RO', NULL, '2021-04-05 04:48:02', '2021-04-05 04:48:02'),
-(4, 4, 1, 2, 'DR. JOYCE GABRIELLE ROQUE', '571.575.868-86', '94015-827', 'eos', '2012-05-29', '24860-777, Avenida Luan Bonilha, 68\nSão Pérola - PB', NULL, '2021-04-05 04:48:02', '2021-04-05 04:48:02'),
-(5, 5, 1, 1, 'SRA. ESTHER ALESSANDRA PACHECO NETO', '573.908.656-60', '76778-772', 'et', '1979-01-14', '44337-636, Av. da Cruz, 54. Bc. 2 Ap. 97\nConstância do Leste - AM', NULL, '2021-04-05 04:48:02', '2021-04-05 04:48:02'),
-(6, 6, 1, 2, 'NATHALIA CORTêS', '907.996.364-01', '52638-666', 'aut', '1993-06-10', '07197-139, Largo Bittencourt, 844\nSoares d\'Oeste - MS', NULL, '2021-04-05 04:48:02', '2021-04-05 04:48:02'),
-(7, 7, 1, 2, 'JERôNIMO LOZANO FONTES', '170.596.728-00', '54196-911', 'rerum', '1996-06-19', '09180-052, Av. Isaac, 5. Fundos\nLeon do Norte - AP', NULL, '2021-04-05 04:48:02', '2021-04-05 04:48:02');
+INSERT INTO `collaborators` (`id`, `user_id`, `manager_id`, `created_by`, `name`, `age`, `cpf`, `cep`, `ocupattion`, `dt_birth`, `address`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 1, 'TICTO', 19, '460.113.725-03', '37141-603', 'voluptates', '2001-05-14', '54552-818, Travessa Valência, 2416. Apto 90\nSales do Norte - BA', NULL, '2021-04-05 15:16:23', '2021-04-05 15:16:23'),
+(2, 2, 1, 1, 'HEDLEY Lima', 32, '113.526.907-64', '35865-642', 'dolorem', '1988-12-27', '08581-789, Av. Ivan, 14350. Apto 2265\nAlessandro do Sul - TO', NULL, '2021-04-05 15:16:24', '2021-04-05 16:39:13'),
+(3, 3, 1, 2, 'ELAINE ISADORA GALVãO', 34, '352.466.575-66', '92612-579', 'distinctio', '1986-11-22', '43226-390, Largo Benício, 49. Bloco C\nAssunção d\'Oeste - AP', NULL, '2021-04-05 15:16:24', '2021-04-05 15:16:24'),
+(4, 4, 1, 1, 'PALOMA SANCHES DELGADO', 26, '386.678.878-97', '73278-466', 'sapiente', '1995-01-03', '37134-406, Travessa Regiane, 60\nVila Nicole - AL', NULL, '2021-04-05 15:16:24', '2021-04-05 15:16:24'),
+(5, 5, 2, 1, 'MAíSA DE ARRUDA NETO', 31, '118.413.629-72', '61385-884', 'quo', '1989-07-22', '91632-500, Travessa Madeira, 5655. 2º Andar\nRobson do Leste - AL', NULL, '2021-04-05 15:16:24', '2021-04-05 15:16:24'),
+(6, 6, 2, 2, 'DR. DIEGO RICARDO ASSUNçãO', 21, '222.327.343-23', '31892-210', 'quia', '1999-08-13', '83173-936, Largo Luana Vila, 68\nRangel do Norte - AC', NULL, '2021-04-05 15:16:24', '2021-04-05 15:16:24'),
+(7, 7, 1, 1, 'ADRIEL ALLAN FRANCO FILHO', 42, '474.924.853-36', '87902-799', 'quia', '1979-01-26', '33747-698, R. Isabella Rezende, 574\nSanta Sérgio d\'Oeste - ES', NULL, '2021-04-05 15:16:24', '2021-04-05 15:16:24'),
+(8, 10, 1, 2, 'DR. CHRISTOPHER FERREIRA JR.', 44, '400.917.303-33', '54623-013', 'eos', '1976-07-17', '92031-636, Av. Lutero, 9819\nAlcantara do Leste - GO', NULL, '2021-04-05 15:20:54', '2021-04-05 15:20:54'),
+(9, 11, 2, 2, 'SANDRO JOSé PAES', 37, '471.668.837-23', '20924-141', 'eum', '1983-04-18', '06056-620, Travessa da Silva, 8\nVila William do Norte - PB', NULL, '2021-04-05 15:20:54', '2021-04-05 15:20:54'),
+(10, 12, 2, 2, 'SRA. LUNA LIDIANE BATISTA', 25, '570.826.377-64', '42649-053', 'quis', '1996-02-21', '60703-700, Rua Lutero, 96160\nGalindo do Leste - MT', NULL, '2021-04-05 15:20:54', '2021-04-05 15:20:54'),
+(11, 13, 2, 1, 'SRTA. JOYCE LEAL DAS DORES', 19, '644.434.002-06', '24325-266', 'explicabo', '2001-12-28', '77677-961, Av. Rosana Guerra, 52. F\nAlexa do Norte - MS', NULL, '2021-04-05 15:20:54', '2021-04-05 15:20:54'),
+(12, 14, 2, 1, 'INáCIO FIDALGO SOBRINHO', 47, '978.286.986-40', '88619-011', 'rerum', '1973-06-05', '20064-904, Travessa Inácio Furtado, 934. Fundos\nChaves do Norte - PR', NULL, '2021-04-05 15:20:54', '2021-04-05 15:20:54'),
+(13, 17, 2, 1, 'ROSANA CARRARA NETO', 33, '933.826.498-02', '29609-412', 'occaecati', '1987-11-19', '22429-784, Av. Lavínia, 4\nSão Sônia do Norte - SE', NULL, '2021-04-05 15:20:59', '2021-04-05 15:20:59'),
+(14, 18, 1, 2, 'CíNTIA CORDEIRO JR.', 29, '879.574.764-81', '83652-434', 'iure', '1992-02-22', '85954-071, Largo Antonieta Lutero, 9462. Apto 7\nPorto Maraisa - MT', NULL, '2021-04-05 15:20:59', '2021-04-05 15:20:59'),
+(15, 19, 2, 1, 'SR. ANTôNIO GIAN REZENDE', 46, '104.055.708-21', '15626-617', 'et', '1974-05-18', '12890-649, Largo Willian Soares, 9388. Bloco B\nPorto Alessandra do Norte - PE', NULL, '2021-04-05 15:20:59', '2021-04-05 15:20:59'),
+(17, 21, 1, 2, 'TEOBALDO JáCOMO ABREU SOBRINHO', 39, '019.792.758-07', '39602-236', 'magnam', '1981-12-18', '06194-022, Av. Vila, 8983. Apto 814\nSanta Breno - AL', NULL, '2021-04-05 15:20:59', '2021-04-05 15:20:59'),
+(18, 26, 2, NULL, 'Hedley Lima Cunha', 30, '950.640.540-92', '65912-340', 'empregado', '1990-11-26', 'Avenida Itaipu, Parque Santa Lúcia, Imperatriz - MA', NULL, '2021-04-05 15:36:13', '2021-04-05 15:36:13');
 
 -- --------------------------------------------------------
 
@@ -146,14 +157,13 @@ CREATE TABLE `registers` (
 --
 
 INSERT INTO `registers` (`id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 3, '2021-04-05 04:50:43', '2021-04-05 04:50:43'),
-(2, 2, '2021-04-05 04:51:29', '2021-04-05 04:51:29'),
-(3, 2, '2021-04-05 05:38:45', '2021-04-05 05:38:45'),
-(4, 2, '2021-04-05 08:42:16', '2021-04-05 08:42:16'),
-(5, 2, '2021-04-05 08:42:18', '2021-04-05 08:42:18'),
-(6, 2, '2021-04-05 08:42:19', '2021-04-05 08:42:19'),
-(7, 3, '2021-04-05 09:12:31', '2021-04-05 09:12:31'),
-(8, 3, '2021-04-05 09:12:34', '2021-04-05 09:12:34');
+(1, 2, '2021-04-05 16:16:52', '2021-04-05 16:16:52'),
+(2, 2, '2021-04-05 16:17:12', '2021-04-05 16:17:12'),
+(3, 5, '2021-04-05 16:22:36', '2021-04-05 16:22:36'),
+(4, 5, '2021-04-05 16:22:38', '2021-04-05 16:22:38'),
+(5, 5, '2021-04-05 16:22:39', '2021-04-05 16:22:39'),
+(6, 5, '2021-04-05 16:22:40', '2021-04-05 16:22:40'),
+(7, 2, '2021-04-05 16:38:59', '2021-04-05 16:38:59');
 
 -- --------------------------------------------------------
 
@@ -175,7 +185,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('K16iShdi1zoQzzcF8LLa8moB3dsoO2iPZ8wL56gg', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36 Edg/89.0.774.63', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoia0l5SzI4cnZMY3hpRjBZN0V6ZG5jb21kZ09Gcnh0ODBYQ3BJR3RiVCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9kYXNoYm9hcmQiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkOTJJWFVOcGtqTzByT1E1YnlNaS5ZZTRvS29FYTNSbzlsbEMvLm9nL2F0Mi51aGVXRy9pZ2kiO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJDkySVhVTnBrak8wck9RNWJ5TWkuWWU0b0tvRWEzUm85bGxDLy5vZy9hdDIudWhlV0cvaWdpIjt9', 1617616709);
+('1mg8EIv1AtR0mr9Ywemipov2HWjzwGmbkpTtK1Gx', 5, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36 Edg/89.0.774.63', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiWU1DT0NaT1dFN2NJRUliSldSeVIyOWhJcjlTUG52U1lLa3dubUZ5QSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MTp7aTowO3M6NzoibWVzc2FnZSI7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6NTtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEwJDkySVhVTnBrak8wck9RNWJ5TWkuWWU0b0tvRWEzUm85bGxDLy5vZy9hdDIudWhlV0cvaWdpIjtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCQ5MklYVU5wa2pPMHJPUTVieU1pLlllNG9Lb0VhM1JvOWxsQy8ub2cvYXQyLnVoZVdHL2lnaSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9kYXNoYm9hcmQiO319', 1617639760),
+('blcaWfPmlaQh5NlFlQdwSeKRG1DFiwka1xEYWPLd', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36 Edg/89.0.774.63', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiVTZCTW1URDBVSDBJTVNBVE8xQkFrNjRnblBMT21vY1UyY2toakdBcCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjMxOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvZGFzaGJvYXJkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEwJDkySVhVTnBrak8wck9RNWJ5TWkuWWU0b0tvRWEzUm85bGxDLy5vZy9hdDIudWhlV0cvaWdpIjtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCQ5MklYVU5wa2pPMHJPUTVieU1pLlllNG9Lb0VhM1JvOWxsQy8ub2cvYXQyLnVoZVdHL2lnaSI7fQ==', 1617640764);
 
 -- --------------------------------------------------------
 
@@ -204,13 +215,23 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `remember_token`, `profile_photo_path`, `type`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'TICTORGFGF', 'ticto@ticto.coh', '2021-04-05 04:48:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'awjB0eddK7', NULL, 1, NULL, '2021-04-05 04:48:01', '2021-04-05 09:46:17'),
-(2, 'Hedley', 'hedley.ti@gmail.com', '2021-04-05 04:48:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'mSI9woAI6wA9kUFPBJ4Jwa5HvlIwB9IdRLJWNKduIQoK2tqJFFShjR8Pxq0W', NULL, 1, NULL, '2021-04-05 04:48:01', '2021-04-05 04:48:01'),
-(3, 'Isabella Godói Ferraz Neto', 'pchaves@example.org', '2021-04-05 04:48:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'gSJJdUnCrXIGPax0cXDZxOjmtHTnVkbamGaAlL8b5xsQtpnn2mYOPS5hmYFY', NULL, NULL, NULL, '2021-04-05 04:48:01', '2021-04-05 04:48:01'),
-(4, 'Dr. Joyce Gabrielle Roque', 'vale.ivan@example.org', '2021-04-05 04:48:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'mdZrUBhxS6', NULL, NULL, NULL, '2021-04-05 04:48:01', '2021-04-05 04:48:01'),
-(5, 'Sra. Esther Alessandra Pacheco Neto', 'serra.benedito@example.com', '2021-04-05 04:48:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'HViC5mY8NK', NULL, NULL, NULL, '2021-04-05 04:48:01', '2021-04-05 04:48:01'),
-(6, 'Nathalia Cortês', 'juliano44@example.com', '2021-04-05 04:48:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, '7DV5DVkmxL', NULL, NULL, NULL, '2021-04-05 04:48:02', '2021-04-05 04:48:02'),
-(7, 'Jerônimo Lozano Fontes', 'ferraz.lia@example.org', '2021-04-05 04:48:01', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'I1G1j64Jr2', NULL, NULL, NULL, '2021-04-05 04:48:02', '2021-04-05 04:48:02');
+(1, 'Ticto', 'ticto@ticto.com', '2021-04-05 15:16:23', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'bAAeakOktd', NULL, 1, NULL, '2021-04-05 15:16:23', '2021-04-05 15:16:23'),
+(2, 'HEDLEY Lima', 'hedley.ti@gmail.com', '2021-04-05 15:16:23', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'RlV9fl5pLB', NULL, 1, NULL, '2021-04-05 15:16:23', '2021-04-05 16:39:13'),
+(3, 'Elaine Isadora Galvão', 'iferraz@example.org', '2021-04-05 15:16:24', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'X34QCqv62y', NULL, NULL, NULL, '2021-04-05 15:16:24', '2021-04-05 15:16:24'),
+(4, 'Paloma Sanches Delgado', 'carol.oliveira@example.com', '2021-04-05 15:16:24', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'V8YWuVQ6LJ', NULL, NULL, NULL, '2021-04-05 15:16:24', '2021-04-05 15:16:24'),
+(5, 'Maísa de Arruda Neto', 'curias@example.net', '2021-04-05 15:16:24', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'MoUk5FRnap', NULL, NULL, NULL, '2021-04-05 15:16:24', '2021-04-05 15:16:24'),
+(6, 'Dr. Diego Ricardo Assunção', 'sales.daniela@example.com', '2021-04-05 15:16:24', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'TNMmQEs5xV', NULL, NULL, NULL, '2021-04-05 15:16:24', '2021-04-05 15:16:24'),
+(7, 'Adriel Allan Franco Filho', 'paulo.faro@example.org', '2021-04-05 15:16:24', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, '8Zx4bAzx9o', NULL, NULL, NULL, '2021-04-05 15:16:24', '2021-04-05 15:16:24'),
+(10, 'Dr. Christopher Ferreira Jr.', 'tatiane69@example.net', '2021-04-05 15:20:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'lVEz3I2fdx', NULL, NULL, NULL, '2021-04-05 15:20:54', '2021-04-05 15:20:54'),
+(11, 'Sandro José Paes', 'deivid32@example.com', '2021-04-05 15:20:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'xqivNi8Y7b', NULL, NULL, NULL, '2021-04-05 15:20:54', '2021-04-05 15:20:54'),
+(12, 'Sra. Luna Lidiane Batista', 'torres.eduardo@example.com', '2021-04-05 15:20:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'MuJvYQacyy', NULL, NULL, NULL, '2021-04-05 15:20:54', '2021-04-05 15:20:54'),
+(13, 'Srta. Joyce Leal das Dores', 'lia81@example.com', '2021-04-05 15:20:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, '4YalNYwt4W', NULL, NULL, NULL, '2021-04-05 15:20:54', '2021-04-05 15:20:54'),
+(14, 'Inácio Fidalgo Sobrinho', 'ingrid.faria@example.net', '2021-04-05 15:20:54', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'rIzShbqZ2M', NULL, NULL, NULL, '2021-04-05 15:20:54', '2021-04-05 15:20:54'),
+(17, 'Rosana Carrara Neto', 'cristina.madeira@example.net', '2021-04-05 15:20:59', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'dLtTTkgRYo', NULL, NULL, NULL, '2021-04-05 15:20:59', '2021-04-05 15:20:59'),
+(18, 'Cíntia Cordeiro Jr.', 'fabio.lozano@example.org', '2021-04-05 15:20:59', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'PQYa5S78Mj', NULL, NULL, NULL, '2021-04-05 15:20:59', '2021-04-05 15:20:59'),
+(19, 'Sr. Antônio Gian Rezende', 'medina.amanda@example.com', '2021-04-05 15:20:59', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'O4vUc8mJlS', NULL, NULL, NULL, '2021-04-05 15:20:59', '2021-04-05 15:20:59'),
+(21, 'Teobaldo Jácomo Abreu Sobrinho', 'fatima.teles@example.net', '2021-04-05 15:20:59', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'QnIvKecuDq', NULL, NULL, NULL, '2021-04-05 15:20:59', '2021-04-05 15:20:59'),
+(26, 'Hedley Lima Cunha', 'hedley.ti2@gmail.com', NULL, '12345678', NULL, NULL, NULL, NULL, NULL, NULL, '2021-04-05 15:36:13', '2021-04-05 15:36:13');
 
 --
 -- Índices para tabelas despejadas
@@ -221,6 +242,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `tw
 --
 ALTER TABLE `collaborators`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `collaborators_cpf_unique` (`cpf`),
   ADD KEY `collaborators_user_id_foreign` (`user_id`);
 
 --
@@ -280,7 +302,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `collaborators`
 --
 ALTER TABLE `collaborators`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de tabela `failed_jobs`
@@ -304,13 +326,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT de tabela `registers`
 --
 ALTER TABLE `registers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Restrições para despejos de tabelas
