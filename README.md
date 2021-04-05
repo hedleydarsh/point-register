@@ -16,7 +16,7 @@ de dados MYSQL, PHP, Laravel, Jestream e Liveware.
 - [COMPOSER]('https://getcomposer.org/download/')
 - Faça o clode desse repositório
 - Use $ git clone git clone https://hedleyLima@bitbucket.org/hedleyLima/point-register.git
-ˋˋˋ
+
 - Rode o comando: 
 ~~~PHP
  composer update --no-scripts
@@ -52,7 +52,7 @@ $ php artisan migrate
   - você pode utilizar as credencias: 
   - Login: ticto@ticto.com
   - Senha: password
- ˋˋˋ
+ 
 
 ## About Laravel
 
