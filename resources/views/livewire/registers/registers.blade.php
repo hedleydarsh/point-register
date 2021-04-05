@@ -33,6 +33,32 @@
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                        <div class="grid grid-cols-6 gap-6 m-4">
+                            <div class="col-span-3 sm:col-span-3 lg:col-span-2">
+                                <label for="postal_code" class="block text-sm font-medium text-gray-700">
+                                    Data Início
+                                </label>
+                                <input type="date" wire:model="dt_start"
+                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+                            <div class="col-span-3 sm:col-span-3 lg:col-span-2">
+                                <label for="postal_code" class="block text-sm font-medium text-gray-700">
+                                    Término
+                                </label>
+                                <input type="date" wire:model="dt_end"
+                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            </div>
+                            <div class="col-span-3 sm:col-span-3 lg:col-span-2 py-6">
+                                <button type="button" wire:click="getByRegister()" wire:loading.attr="disabled"
+                                    class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-400 hover:bg-blue-500 hover:shadow-lg">
+                                    <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50">
@@ -67,42 +93,79 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    {{-- {{
-                                        dd($collaborators) }} --}}
-                                    @foreach ($collaborators as $collab)
-                                        <tr>
-                                            <td class="px-6 py-4">
-                                                <div class="text-sm text-gray-900">
-                                                    {{ $collab->register_id }}
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <div class="text-sm text-gray-900">
-                                                    {{ strtoupper($collab->name_subordinate) }}
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <div class="text-sm text-gray-900">
-                                                    {{ strtoupper($collab->ocupattion) }}
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-900">
-                                                    {{ $collab->ocupattion }}
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-900">
-                                                    {{ strtoupper($collab->name_manager) }}
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-900">
-                                                    {{ DateTime::createFromFormat('Y-m-d H:i:s', $collab->hour)->format('d/m/Y H:i:s') }}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                    @if ($search)
+                                        @if ($collaborators)
+                                            @foreach ($collaborators as $collab)
+                                                <tr>
+                                                    <td class="px-6 py-4">
+                                                        <div class="text-sm text-gray-900">
+                                                            {{ $collab->register_id }}
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        <div class="text-sm text-gray-900">
+                                                            {{ strtoupper($collab->name_subordinate) }}
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        <div class="text-sm text-gray-900">
+                                                            {{ strtoupper($collab->ocupattion) }}
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                        <div class="text-sm text-gray-900">
+                                                            {{ $collab->ocupattion }}
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                        <div class="text-sm text-gray-900">
+                                                            {{ strtoupper($collab->name_manager) }}
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                        <div class="text-sm text-gray-900">
+                                                            {{ DateTime::createFromFormat('Y-m-d H:i:s', $collab->hour)->format('d/m/Y H:i:s') }}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+                                    @else
+                                        @foreach ($collaboratores as $collab)
+                                            <tr>
+                                                <td class="px-6 py-4">
+                                                    <div class="text-sm text-gray-900">
+                                                        {{ $collab->register_id }}
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    <div class="text-sm text-gray-900">
+                                                        {{ strtoupper($collab->name_subordinate) }}
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    <div class="text-sm text-gray-900">
+                                                        {{ strtoupper($collab->ocupattion) }}
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="text-sm text-gray-900">
+                                                        {{ $collab->ocupattion }}
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="text-sm text-gray-900">
+                                                        {{ strtoupper($collab->name_manager) }}
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="text-sm text-gray-900">
+                                                        {{ DateTime::createFromFormat('Y-m-d H:i:s', $collab->hour)->format('d/m/Y H:i:s') }}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

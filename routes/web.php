@@ -25,11 +25,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 //rotas de usuários
-Route::middleware(['auth:sanctum', 'verified'])
+Route::middleware(['auth:sanctum', 'verified', 'can:isAdmin'])
     ->get('/usuarios', Users::class)->name('users');
 
     Route::middleware(['auth:sanctum', 'verified'])
     ->get('/registro-de-ponto', Register::class)->name('register');
 
-    Route::middleware(['auth:sanctum', 'verified'])
+    Route::middleware(['auth:sanctum', 'verified', 'can:isAdmin'])
     ->get('/registro-de-ponto-colaborador', Registers::class)->name('registers');
