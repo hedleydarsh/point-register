@@ -18,11 +18,11 @@ de dados MYSQL, PHP, Laravel, Jestream e Liveware.
 - Use $ git clone git clone https://hedleyLima@bitbucket.org/hedleyLima/point-register.git
 ˋˋˋ
 - Rode o comando: 
-~~~ PHP
+~~~PHP
  composer update --no-scripts
 ~~~
 - Rode os comandos:
-~~~ Nodejs
+~~~Nodejs
   $npm install && $npm run dev
 ~~~~
 - Crie um banco de dados mysql com nome point_register.
