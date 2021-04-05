@@ -22,27 +22,29 @@ class Registers extends Component
 
 
     public function getRegister(){
-        $query = "select c.id, c.name as name_subordinate, c.ocupattion,
+        $manager_id = auth()->user()->id;
+        $query = "select c.id, c.name as name_subordinate, c.age, c.ocupattion,
         m.name as name_manager, r.created_at as hour,
         r.id as register_id from registers r  inner join users u on r.user_id = u.id
         inner join collaborators c on c.user_id = u.id
         inner join users m on c.manager_id = m.id
-        where u.id = 2 ORDER BY r.created_at DESC";
+        where c.manager_id = $manager_id  ORDER BY r.created_at DESC";
         return DB::select($query);
     }
 
     public function getByRegister()
     {
         $this->search = true;
+        $manager_id = auth()->user()->id;
         $start = $this->dt_start . ' 00:00:00';
         $end = $this->dt_end . ' 23:59:59';
 
-        $query = "select c.id, c.name as name_subordinate, c.ocupattion,
+        $query = "select c.id, c.name as name_subordinate, c.age, c.ocupattion,
         m.name as name_manager, r.created_at as hour,
         r.id as register_id from registers r  inner join users u on r.user_id = u.id
         inner join collaborators c on c.user_id = u.id
         inner join users m on c.manager_id = m.id
-        where u.id = 2 and r.created_at BETWEEN '$start' and '$end' ORDER BY r.created_at DESC";
+        where c.manager_id = $manager_id and r.created_at BETWEEN '$start' and '$end' ORDER BY r.created_at DESC";
 
         $this->collaborators = DB::select($query);
 
