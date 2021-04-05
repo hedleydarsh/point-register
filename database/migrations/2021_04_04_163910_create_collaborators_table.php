@@ -22,12 +22,13 @@ class CreateCollaboratorsTable extends Migration
             $table->foreignId('manager_id')->nullable();
             $table->foreignId('created_by')->nullable();
 
-            $table->string('name')->nullable();
-            $table->string('cpf', 14)->nullable();
-            $table->string('cep')->nullable();
-            $table->string('ocupattion')->nullable();
-            $table->date('dt_birth')->nullable();
-            $table->text('address')->nullable();
+            $table->string('name');
+            $table->integer('age');
+            $table->string('cpf', 14)->unique();
+            $table->string('cep');
+            $table->string('ocupattion');
+            $table->date('dt_birth');
+            $table->text('address');
             $table->softDeletes();
             $table->timestamps();
         });
