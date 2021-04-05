@@ -363,7 +363,7 @@
             </x-slot>
         </x-jet-dialog-modal>
 
-        <!-- Create User Modal -->
+        <!-- Update User Modal -->
         <x-jet-dialog-modal wire:model="editingUser">
             <x-slot name="title">
                 Editar Colaborador

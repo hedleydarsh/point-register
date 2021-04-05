@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Collaborator;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CollaboratorSeeder extends Seeder
 {
@@ -15,11 +16,13 @@ class CollaboratorSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(5)->create()->each(function ($user) {
-            Collaborator::factory(1)->create([
-                'user_id' => $user['id'],
-                'name' => $user->name
-            ]);
+        DB::transaction(function () {
+            User::factory(5)->create()->each(function ($user) {
+                Collaborator::factory(1)->create([
+                    'user_id' => $user['id'],
+                    'name' => $user->name
+                ]);
+            });
         });
     }
 }

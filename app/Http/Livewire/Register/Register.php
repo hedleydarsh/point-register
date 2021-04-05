@@ -13,6 +13,7 @@ class Register extends Component
     {
         $user = auth()->user();
         $dtHoje = '%' . Carbon::now()->format('Y-m-d') . '%';
+
         $registers = ModelsRegister::where('created_at', 'like', $dtHoje)
             ->where('user_id', $user->id)
             ->orderBy('created_at', 'desc')
