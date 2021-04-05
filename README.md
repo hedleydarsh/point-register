@@ -36,6 +36,10 @@ de dados MYSQL, PHP, Laravel, Jestream e Liveware.
 
 - Pronto o sistema estará rodando na url http://localhost:8000
   Obs: Caso prefira este projeto contempla em sua pasta rais um arquivo BANCODEDADOS.sql, você pode iniciar e popular o seu banco com ele.
+  
+  - você pode utilizar as credencias: 
+  - Login: ticto@ticto.co
+  - Senha: password
 
 ## About Laravel
 
