@@ -28,8 +28,9 @@ class Registers extends Component
         r.id as register_id from registers r  inner join users u on r.user_id = u.id
         inner join collaborators c on c.user_id = u.id
         inner join users m on c.manager_id = m.id
-        where c.manager_id = $manager_id  ORDER BY r.created_at DESC";
-        return DB::select($query);
+        where c.manager_id = ?  ORDER BY r.created_at DESC";
+
+        $this->collaborators = DB::raw($query, [$manager_id]);
     }
 
     public function getByRegister()
@@ -44,10 +45,8 @@ class Registers extends Component
         r.id as register_id from registers r  inner join users u on r.user_id = u.id
         inner join collaborators c on c.user_id = u.id
         inner join users m on c.manager_id = m.id
-        where c.manager_id = $manager_id and r.created_at BETWEEN '$start' and '$end' ORDER BY r.created_at DESC";
+        where c.manager_id = ? and r.created_at BETWEEN ? and ? ORDER BY r.created_at DESC";
 
-        $this->collaborators = DB::select($query);
-
-        // dd($this->collaborators);
+        $this->collaborators = DB::raw($query, [$manager_id, $start, $end]);
     }
 }
