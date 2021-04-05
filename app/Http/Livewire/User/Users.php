@@ -6,6 +6,7 @@ use App\Http\Resources\UserResource;
 use App\Models\Collaborator;
 use App\Models\Manager;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
@@ -72,7 +73,7 @@ class Users extends Component
         $this->name        = $user->name;
         $this->cpf         = $user->collaborator->cpf;
         $this->email       = $user->email;
-        $this->dt_birth    = $user->collaborator->birth;
+        $this->dt_birth    = $user->collaborator->dt_birth;
         $this->cep         = $user->collaborator->cep;
         $this->address     = $user->collaborator->address;
         $this->password    = $user->password;
@@ -90,6 +91,9 @@ class Users extends Component
 
     public function storeUser()
     {
+        $this->dt_birth = Carbon::parse($this->dt_birth)->format('Y-m-d');
+        $age = Carbon::now()->diffInYears($this->dt_birth);
+
         $user = [
             'name'     => $this->name,
             'email'    => $this->email,
@@ -97,11 +101,12 @@ class Users extends Component
         ];
 
         $collaborator = [
-            'name'     => $this->name,
+            'name'       => $this->name,
+            'age'        => $age,
             'cpf'        => $this->cpf,
             'dt_birth'   => $this->dt_birth,
             'cep'        => $this->cep,
-            'addres'     => $this->address,
+            'address'     => $this->address,
             'manager_id'    => $this->manager_id,
             'ocupattion' => $this->ocupattion,
             'created_by' => auth()->user()->id,
@@ -109,27 +114,29 @@ class Users extends Component
 
         $this->validate();
 
-        //Inicia o Database Transaction
-        DB::beginTransaction();
+        try {
+            //Inicia o Database Transaction
+            DB::beginTransaction();
 
-        $newUser = User::create($user);
-        $collaborator['user_id'] = $newUser->id;
-        $newCollaborattor = Collaborator::create($collaborator);
+            $newUser = User::create($user);
+            $collaborator['user_id'] = $newUser->id;
+            $newCollaborattor = Collaborator::create($collaborator);
 
-        if ($newUser && $newCollaborattor) {
-            //Sucesso!
             DB::commit();
             session()->flash('message', 'Usuário Salvo com sucesso!');
             $this->creatingUser = false;
-        } else {
-            dd('falhou');
-            //Fail, desfaz as alterações no banco de dados
+        } catch (\Throwable $th) {
             DB::rollBack();
+            session()->flash('message', 'Não foi possível salvar o usuário!');
+            $this->creatingUser = false;
         }
     }
 
     public function updateUser($id)
     {
+        $this->dt_birth = Carbon::parse($this->dt_birth)->format('Y-m-d');
+        $age = Carbon::now()->diffInYears($this->dt_birth);
+
         $userForm = [
             'name'     => $this->name,
             'email'    => $this->email,
@@ -137,37 +144,48 @@ class Users extends Component
         ];
 
         $collaborator = [
-            'name'     => $this->name,
+            'name'       => $this->name,
+            'age'        => $age,
             'cpf'        => $this->cpf,
             'dt_birth'   => $this->dt_birth,
             'cep'        => $this->cep,
-            'address'     => $this->address,
+            'address'    => $this->address,
             'manager_id' => $this->manager_id,
             'ocupattion' => $this->ocupattion,
             'user_id'    => $id,
             'created_by' => auth()->user()->id,
         ];
 
-        $this->validate();
+        $getUser = User::find($id);
+        $getCollaborattor = Collaborator::where('user_id', $id)->first();
 
-        //Inicia o Database Transaction
-        DB::beginTransaction();
-
-        $newUser = User::find($id)->update($userForm);
-        $newCollaborattor = Collaborator::where('user_id', $id)->update($collaborator);
-
-        if ($newUser && $newCollaborattor) {
-            //Sucesso!
-            DB::commit();
-            session()->flash('message', 'Usuário Salvo com sucesso!');
-            $this->editingUser = false;
-        } else {
-            dd('falhou');
-            //Fail, desfaz as alterações no banco de dados
-            DB::rollBack();
+        if ($getUser['email'] == $userForm['email']) {
+            unset($userForm['email']);
+            unset($this->rules['email']);
         }
 
-        $this->editingUser = false;
+        if ($getCollaborattor['cpf'] == $collaborator['cpf']) {
+            unset($collaborator['cpf']);
+            unset($this->rules['cpf']);
+        }
+
+        $this->validate();
+
+        try {
+            //Inicia o Database Transaction
+            DB::beginTransaction();
+
+            $newUser = $getUser->update($userForm);
+            $newCollaborattor = $getCollaborattor->update($collaborator);
+            DB::commit();
+
+            session()->flash('message', 'Usuário Salvo com sucesso!');
+            $this->editingUser = false;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            session()->flash('message', 'Não foi possível salvar o usuário!');
+            $this->editingUser = false;
+        }
     }
 
     public function deleteUser(User $user)
@@ -186,6 +204,10 @@ class Users extends Component
     {
         if ($field == 'cep') {
             $this->cep = Manny::mask($this->cep, "11111-111");
+        }
+
+        if ($field == 'dt_birth') {
+            $this->cep = Manny::mask($this->cep, "11/11/1111");
         }
     }
 

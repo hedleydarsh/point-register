@@ -18,7 +18,9 @@ class Collaborator extends Model
         'dt_birth',
         'cep',
         'manager_id',
-        'user_id'
+        'user_id',
+        'address',
+        'age'
     ];
 
     public function user()
