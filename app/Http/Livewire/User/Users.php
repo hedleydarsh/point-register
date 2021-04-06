@@ -8,6 +8,7 @@ use App\Models\Manager;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -36,6 +37,7 @@ class Users extends Component
     public $password;
     public $manager_id;
     public $ocupattion;
+    public $type;
 
 
     //Regras de validação
@@ -73,6 +75,7 @@ class Users extends Component
         $this->name        = $user->name;
         $this->cpf         = $user->collaborator->cpf;
         $this->email       = $user->email;
+        $this->type       = $user->type;
         $this->dt_birth    = $user->collaborator->dt_birth;
         $this->cep         = $user->collaborator->cep;
         $this->address     = $user->collaborator->address;
@@ -96,8 +99,9 @@ class Users extends Component
 
         $user = [
             'name'     => $this->name,
+            'type'     => $this->type,
             'email'    => $this->email,
-            'password' => $this->password,
+            'password' => Hash::make($this->password),
         ];
 
         $collaborator = [
@@ -106,8 +110,8 @@ class Users extends Component
             'cpf'        => $this->cpf,
             'dt_birth'   => $this->dt_birth,
             'cep'        => $this->cep,
-            'address'     => $this->address,
-            'manager_id'    => $this->manager_id,
+            'address'    => $this->address,
+            'manager_id' => $this->manager_id,
             'ocupattion' => $this->ocupattion,
             'created_by' => auth()->user()->id,
         ];
@@ -139,8 +143,9 @@ class Users extends Component
 
         $userForm = [
             'name'     => $this->name,
+            'type'     => $this->type,
             'email'    => $this->email,
-            'password' => $this->password,
+            'password' => Hash::make($this->password),
         ];
 
         $collaborator = [

@@ -191,8 +191,8 @@
                     {{ __('Cancelar') }}
                 </x-jet-secondary-button>
 
-                <x-jet-danger-button class="ml-2" wire:click="deleteUser({{ $confirmingUserDeletion }})" wire:loading.attr="disabled"
-                    wire:loading.attr="disabled">
+                <x-jet-danger-button class="ml-2" wire:click="deleteUser({{ $confirmingUserDeletion }})"
+                    wire:loading.attr="disabled" wire:loading.attr="disabled">
                     {{ __('Deletar') }}
                 </x-jet-danger-button>
             </x-slot>
@@ -351,6 +351,12 @@
                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                 @error('address') <span class="error">{{ $message }}</span> @enderror
                             </div>
+                            <div class="flex mt-6">
+                                <label class="flex items-center">
+                                    <input type="checkbox" wire:model="type" class="form-checkbox">
+                                    <span class="ml-2">Acesso administrativo?</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <x-slot name="footer">
@@ -465,10 +471,17 @@
                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                 @error('address') <span class="error">{{ $message }}</span> @enderror
                             </div>
+                            <div class="flex mt-6">
+                                <label class="flex items-center">
+                                    <input type="checkbox" wire:model="type" class="form-checkbox">
+                                    <span class="ml-2">Acesso administrativo?</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <x-slot name="footer">
-                        <button type="submit" wire:click="updateUser({{ $editingUser }}) wire:loading.attr=" disabled"
+                        <button type="submit" wire:click="updateUser({{ $editingUser }}) wire:loading.attr="
+                            disabled"
                             class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             {{ __('Salvar') }}
                         </button>
